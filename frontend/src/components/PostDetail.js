@@ -10,9 +10,6 @@ function PostDetail(props) {
     'Yes, we went to school in the sea, though you mayn't believe it—'
     'I never said I didn't!' interrupted Alice.
     'You did,' said the Mock Turtle.</p>
-            {/* <div>
-                <span className="badge badge-success">Posted 2012-08-02 20:47:04</span><div className="pull-right"><span className="label">alice</span> <span class="label">story</span> <span class="label">blog</span> <span class="label">personal</span></div>
-            </div> */}
         </div>
         <div className="row">
             <div className="span6">
