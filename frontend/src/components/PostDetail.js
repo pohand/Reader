@@ -41,11 +41,11 @@ class PostDetail extends Component {
                     <div className="col-md-6">
                         <form>
                             <div className="form-group">
-                                <label for="usr">Name:</label>
+                                <label htmlFor="usr">Name:</label>
                                 <input type="text" className="form-control" id="usr" />
                             </div>
                             <div className="form-group">
-                                <label for="comment">Comment:</label>
+                                <label htmlFor="comment">Comment:</label>
                                 <textarea className="form-control" rows="5" id="comment"></textarea>
                             </div>
                             <div className="form-group">

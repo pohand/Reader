@@ -49,33 +49,28 @@ class ListPost extends Component {
             showingListPosts = this.props.posts;
         }
         
-        return (            
-          <div class="container">
-          <div className="col-md-4">
-            <div className="row">
-              <div className="text-center">
-                <div className="list-group list-group-horizontal">
-                    <Link to="" key="\" className="list-group-item">
+        return (  
+          <div className="container">
+            <div className="btn-group">
+                <Link to="" key="\" className="btn btn-primary">
                         All
-                    </Link>
-                  {this.props.categories && this.props.categories.map((category) => (
-                    <Link to={`${category.path}`} key={category.path} className="list-group-item">
+                </Link>
+                {this.props.categories && this.props.categories.map((category) => (
+                    <Link to={`${category.path}`} key={category.path} className="btn btn-primary">
                       {category.name}
                     </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-8">
-          <ol >
-                {showingListPosts.map((post) => (
-                    <li key={post.id} >
-                        <Post post={post} />
-                    </li>
                 ))}
-            </ol>
-          </div>
+            </div>                           
+            <br />
+            <br />
+            
+          <div>
+                {showingListPosts.map((post) => (
+                    <div key={post.id} >
+                        <Post post={post} />
+                    </div>
+                ))}
+          </div>          
         </div>
             
         )
