@@ -49,7 +49,7 @@ class ListPost extends Component {
             showingListPosts = this.props.posts;
         }
         
-        return (
+        return (            
           <div class="container">
           <div className="col-md-4">
             <div className="row">

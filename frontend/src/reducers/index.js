@@ -2,10 +2,16 @@ import { combineReducers } from 'redux'
 
 import {
     POSTS_LOAD,
+    POST_SELECT,
+    POST_CREATE,
+    POST_EDIT,
+    POST_DELETE,
+    POST_UP_VOTE,
+    POST_DOWN_VOTE,
     CATEGORY_LOAD,
 } from '../actions'
 
-//POST
+//POSTS
 const SORT_BY_UP = 'upVotes';
 const SORT_BY_DOWN = 'downVotes';
 const SORT_BY_LATEST = 'latest';
@@ -47,7 +53,26 @@ export function posts(state = initialPostsState, action) {
     }
 }
 
+//POST
+function post(state = initialPostDetailState, action) {
+    switch (action.type) {
+        case POST_SELECT:
+        case POST_EDIT:
+        case POST_DOWN_VOTE:
+        case POST_UP_VOTE:
+            return {
+                post: action.post
+            };
+        case POST_DELETE:
+            return initialPostDetailState;
+        default:
+            return state;
+    }
+}
 
+const initialPostDetailState = {
+    post : {}
+}
 //CATEGORY
 const initialCategoriesState = {
     currentCategory: null,
@@ -69,5 +94,6 @@ export function categories(state = initialCategoriesState, action) {
 
 export default combineReducers({
     posts, 
-    categories
+    categories,
+    post
 })

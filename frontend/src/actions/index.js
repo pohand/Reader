@@ -6,6 +6,8 @@ export const POST_SELECT = 'POST_SELECT'
 export const POST_CREATE = 'POST_CREATE'
 export const POST_EDIT = 'POST_EDIT'
 export const POST_DELETE = 'POST_DELETE'
+export const POST_UP_VOTE = 'POST_UP_VOTE'
+export const POST_DOWN_VOTE = 'POST_DOWN_VOTE'
 export const POST_VOTE = 'POST_VOTE'
 
 //CATEGORY
@@ -26,8 +28,7 @@ export const loadPostById = (postId, category) => dispatch => (
     PostAPI.getPostById(postId)
         .then(post => dispatch({
             type: POST_SELECT,
-            post,
-            category
+            post
         }))
 )
 
