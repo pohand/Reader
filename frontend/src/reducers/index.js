@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 
 import {
-    POST_LOAD,
+    POSTS_LOAD,
     CATEGORY_LOAD,
 } from '../actions'
 
@@ -37,7 +37,7 @@ const sortPostsBy = (posts, option) => {
 export function posts(state = initialPostsState, action) {
     const { posts, post, type } = action
     switch (type) {
-        case POST_LOAD:
+        case POSTS_LOAD:
             return {
                 sortBy: SORT_BY_UP,
                 posts: sortPostsBy(posts, SORT_BY_UP)

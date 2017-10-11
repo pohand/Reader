@@ -7,13 +7,13 @@ function Post(props) {
     return (
         <div>
             <div className="left-align">
-            <h3>{props.post.title}</h3>
-            <ul className="list-inline list-unstyled">
-                <li><p>{props.post.body}</p></li>
-                <li>
-                    <span><Link to={`${props.post.category}/${props.post.id}`}><span className="glyphicon glyphicon-folder-open" title="Read full post"></span></Link></span>
-                </li>
-            </ul>
+                <h3>{props.post.title}</h3>
+                <ul className="list-inline list-unstyled">
+                    <li><p>{props.post.body}</p></li>
+                    <li>
+                        <span><Link to={`${props.post.category}/${props.post.id}`}><span className="glyphicon glyphicon-folder-open" title="Read full post"></span></Link></span>
+                    </li>
+                </ul>
             </div>
             <div >
                 <div className="pull-left">

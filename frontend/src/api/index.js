@@ -18,6 +18,10 @@ export const getAllPosts = () =>
     .then(res => res.json())
     .then(data => data)
 
+export const getPostById = (id) =>
+  fetch(`${api}/posts/${id}`, { headers })
+    .then(res => res.json())
+
 export const getCommentsForPost = (postId) =>
   fetch(`${api}/posts/${postId}/comments`, { headers })
     .then(res => res.json())
@@ -37,14 +41,14 @@ export const addPost = (title, body, author, category) =>
   fetch(`${api}/posts`, {
     method: 'POST',
     headers: headers,
-    body: JSON.stringify({ title, body, author, category, id: utils.randomString(20), timestamp:Date.now()})
+    body: JSON.stringify({ title, body, author, category, id: utils.randomString(20), timestamp: Date.now() })
   }).then(res => res.json())
 
 export const editPost = (postId, title, body) =>
   fetch(`${api}/posts/${postId}`, {
     method: 'PUT',
     headers: headers,
-    body: JSON.stringify({ title, body})
+    body: JSON.stringify({ title, body })
   }).then(res => res.json())
 
 export const deletePost = (postId) =>
@@ -52,27 +56,27 @@ export const deletePost = (postId) =>
     method: 'DELETE',
     headers: headers
   }).then(res => res.json())
-  .then(data => data)
+    .then(data => data)
 
 export const voteOnPost = (postId, thumbsUp) =>
   fetch(`${api}/posts/${postId}`, {
     method: 'POST',
     headers: headers,
-    body: JSON.stringify({'option': thumbsUp? 'upVote' : 'downVote'})
+    body: JSON.stringify({ 'option': thumbsUp ? 'upVote' : 'downVote' })
   }).then(res => res.json())
 
 export const addComment = (body, author, parentId) =>
   fetch(`${api}/comments`, {
     method: 'POST',
     headers: headers,
-    body: JSON.stringify({ parentId, body, author, id: (parentId + '_' + utils.randomString(5)), timestamp:Date.now()})
+    body: JSON.stringify({ parentId, body, author, id: (parentId + '_' + utils.randomString(5)), timestamp: Date.now() })
   }).then(res => res.json())
 
 export const editComment = (commentId, body) =>
   fetch(`${api}/comments/${commentId}`, {
     method: 'PUT',
     headers: headers,
-    body: JSON.stringify({timestamp:Date.now(), body})
+    body: JSON.stringify({ timestamp: Date.now(), body })
   }).then(res => res.json())
 
 export const deleteComment = (commentId) =>
@@ -85,5 +89,5 @@ export const voteOnComment = (commentId, thumbsUp) =>
   fetch(`${api}/comments/${commentId}`, {
     method: 'POST',
     headers: headers,
-    body: JSON.stringify({ option: thumbsUp? 'upVote' : 'downVote'})
+    body: JSON.stringify({ option: thumbsUp ? 'upVote' : 'downVote' })
   }).then(res => res.json())
