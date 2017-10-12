@@ -14,6 +14,14 @@ export const POST_VOTE = 'POST_VOTE'
 export const CATEGORY_LOAD = 'CATEGORY_LOAD'
 export const SELECT_CATEGORY = 'SELECT_CATEGORY'
 
+//COMMENT
+export const COMMENTS_LOAD = "COMMENTS_LOAD"
+export const COMMENT_CREATE = "COMMENT_CREATE"
+export const COMMENT_EDIT = "COMMENT_EDIT"
+export const COMMENT_DELETE = "COMMENT_DELETE"
+export const COMMENT_UP_VOTE = "COMMENT_UP_VOTE"
+export const COMMENT_DOWN_VOTE = "COMMENT_DOWN_VOTE"
+
 //POST
 //get all posts
 export const loadPosts = () => dispatch => (
@@ -69,3 +77,38 @@ export const loadPostsInCategory = (category) => dispatch => (
             posts
         }))
 );
+
+//COMMENT
+export const loadComments = (postId) => dispatch => (
+    PostAPI.getCommentsForPost(postId)
+    .then(comments => dispatch({
+        type: COMMENTS_LOAD,
+        postId,
+        comments
+    }))
+);
+
+export const createComment = (comment) => dispatch => (
+    PostAPI.createComment(comment)
+    .then(newComment => dispatch({
+        type: COMMENT_CREATE,
+        comment: newComment
+    }))
+);
+
+export const deleteComment = (id, postId) => dispatch => (
+    PostAPI.deleteComment(id)
+    .then(() => dispatch({
+        type: COMMENT_DELETE,
+        id,
+        postId
+    }))
+)
+
+export const editComment = (id, body) => dispatch => (
+    PostAPI.editComment(id, body)
+    .then(comment => dispatch({
+        type: COMMENT_EDIT,
+        comment
+    }))
+)

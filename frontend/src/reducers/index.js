@@ -9,6 +9,12 @@ import {
     POST_UP_VOTE,
     POST_DOWN_VOTE,
     CATEGORY_LOAD,
+    COMMENT_CREATE,
+    COMMENT_EDIT,
+    COMMENT_DELETE,
+    COMMENT_DOWN_VOTE,
+    COMMENT_UP_VOTE,
+    COMMENTS_LOAD
 } from '../actions'
 
 //POSTS
@@ -71,7 +77,7 @@ function post(state = initialPostDetailState, action) {
 }
 
 const initialPostDetailState = {
-    post : {}
+    post: {}
 }
 //CATEGORY
 const initialCategoriesState = {
@@ -83,17 +89,81 @@ export function categories(state = initialCategoriesState, action) {
     const { categories, category, type } = action
     switch (type) {
         case CATEGORY_LOAD:
-        return {            
-            currentCategory: category,
-            categories,
-        };
+            return {
+                currentCategory: category,
+                categories,
+            };
         default:
             return state;
     }
 }
 
+//COMMENT
+function comment(state = initialCommentState, action) {
+    switch (action.type) {        
+        case COMMENT_CREATE:
+            let existingComments = state[action.comment.parentId] || [];
+            return {
+                ...state,
+                [action.comment.parentId]: existingComments.concat(action.comment)
+            }
+        case COMMENT_UP_VOTE:
+        case COMMENT_DOWN_VOTE:
+        case COMMENT_EDIT:
+            existingComments = state[action.comment.parentId] || [];
+            return {
+                ...state,
+                [action.comment.parentId]: existingComments
+                    .filter(comment => comment.id !== action.comment.id)
+                    .concat(action.comment)
+                    .sort((a, b) => {
+                        return a.timestamp - b.timestamp;
+                    })
+            }
+        case COMMENT_DELETE:
+            existingComments = state[action.postId] || []
+            return {
+                ...state,
+                [action.postId]: existingComments
+                    .filter(comment => comment.id !== action.id)
+            }
+        case POST_DELETE:
+            return {
+                ...state,
+                [action.id]: []
+            }
+        default:
+            return state
+    }
+}
+
+const initialCommentState = {}
+
+//COMMENT
+function comments(state = initialCommentsState, action) {
+    switch (action.type) {
+        case COMMENTS_LOAD:
+            return {
+                ...state,
+                comments: action.comments
+            }
+        default:
+            return state
+    }
+}
+
+const initialCommentsState = {
+    comments: [
+        
+    ] 
+}
+
 export default combineReducers({
-    posts, 
+    posts,
     categories,
-    post
+    post,
+    comments,
+    comment
 })
+
+

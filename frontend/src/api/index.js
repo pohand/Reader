@@ -1,4 +1,5 @@
 import * as utils from '../utils'
+import uuid from 'uuid';
 
 const api = "http://localhost:3001"
 
@@ -69,8 +70,22 @@ export const addComment = (body, author, parentId) =>
   fetch(`${api}/comments`, {
     method: 'POST',
     headers: headers,
-    body: JSON.stringify({ parentId, body, author, id: (parentId + '_' + utils.randomString(5)), timestamp: Date.now() })
+    body: JSON.stringify({ parentId, body, author, id: uuid(), timestamp: Date.now() })
   }).then(res => res.json())
+
+export const createComment = (comment) =>
+fetch(`${api}/comments`, {
+    method: 'POST',
+    headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        ...comment,
+        id: uuid(),
+        timestamp: Date.now()
+    })
+}).then(res => res.json())
 
 export const editComment = (commentId, body) =>
   fetch(`${api}/comments/${commentId}`, {
