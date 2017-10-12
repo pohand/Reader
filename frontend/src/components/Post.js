@@ -45,7 +45,7 @@ function Post(props) {
                                 <i className="glyphicon glyphicon-heart"></i> 12
                         </span>
                             <span className="btn btn-default stat-item">
-                                <i className="glyphicon glyphicon-comment"></i> 2 comments
+                                <i className="glyphicon glyphicon-comment"></i> {props.commentsCount} comments
                         </span>
 
                         </div>

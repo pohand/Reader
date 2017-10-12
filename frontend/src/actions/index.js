@@ -22,6 +22,10 @@ export const COMMENT_DELETE = "COMMENT_DELETE"
 export const COMMENT_UP_VOTE = "COMMENT_UP_VOTE"
 export const COMMENT_DOWN_VOTE = "COMMENT_DOWN_VOTE"
 
+//MODAL
+export const SHOW_COMMENT_FORM = 'SHOW_COMMENT_FORM'
+export const HIDE_COMMENT_FORM = 'HIDE_COMMENT_FORM'
+
 //POST
 //get all posts
 export const loadPosts = () => dispatch => (
@@ -112,3 +116,12 @@ export const editComment = (id, body) => dispatch => (
         comment
     }))
 )
+
+//MODAL
+export function showCommentForm(comment) {
+    return {type: SHOW_COMMENT_FORM, comment}
+  }
+  
+  export function hideCommentForm() {
+    return {type: HIDE_COMMENT_FORM}
+  }

@@ -14,7 +14,9 @@ import {
     COMMENT_DELETE,
     COMMENT_DOWN_VOTE,
     COMMENT_UP_VOTE,
-    COMMENTS_LOAD
+    COMMENTS_LOAD,
+    SHOW_COMMENT_FORM,
+    HIDE_COMMENT_FORM
 } from '../actions'
 
 //POSTS
@@ -105,7 +107,8 @@ function comment(state = initialCommentState, action) {
             let existingComments = state[action.comment.parentId] || [];
             return {
                 ...state,
-                [action.comment.parentId]: existingComments.concat(action.comment)
+                //[action.comment.parentId]: existingComments.concat(action.comment)
+                [action.comment.id]: action.comment
             }
         case COMMENT_UP_VOTE:
         case COMMENT_DOWN_VOTE:
@@ -158,12 +161,31 @@ const initialCommentsState = {
     ] 
 }
 
+//MODAL
+export function commentModal(state = {}, action) {
+    const {comment} = action
+    switch (action.type) {
+      case SHOW_COMMENT_FORM:
+        return {
+          comment,
+          isOpen: true
+        }
+      case HIDE_COMMENT_FORM:
+        return {
+          isOpen: false
+        }
+      default:
+        return state;
+    }
+  }
+
 export default combineReducers({
     posts,
     categories,
     post,
     comments,
-    comment
+    comment,
+    commentModal
 })
 
 
